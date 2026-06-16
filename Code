@@ -1,18 +1,27 @@
 import os
 
+
 os.system("")
 
+
 # Definitions of variables to allow for colored word printing
+
 
 Red = "\033[91mRed\033[0m"
 Orange = "\033[38;2;255;165;0mOrange\033[0m"
 Yellow = "\033[93mYellow\033[0m"
 Green = "\033[92mGreen\033[0m"
 Blue = "\033[94mBlue\033[0m"
+Purple = "\033[95mPurple\033[0m"
+Cyan = "\033[96mCyan\033[0m"
+White = "\033[97mWhite\033[0m"
+
 
 # Define stack
-ringStack = [Blue, Green, Orange, Yellow, Red]
+ringStack = []
 stackSize = len(ringStack)
+colorChoice = ""
+
 
 # Prints stack in order
 def printStack(stack):
@@ -23,37 +32,50 @@ def printStack(stack):
             print(ring)
     print()
 
+
 printStack(ringStack)
+
 
 # Allows for adding and removing rings, as well as closing the program.
 while True:
     choice = int(input("Press 1 to pop from stack,\nPress 2 to add a ring to the stack\nPress 0 to quit\n"))
-
+    print("\n")
 # Removes a ring and prints which ring was removed.
     if(choice == 1):
         if len(ringStack) > 0:
             removed_ring = ringStack.pop()
             print(f"Removed: {removed_ring}")
         else:
-            print("All Rings Placed")
+            print("All Rings Removed")
         printStack(ringStack)
+
 
 # Adds new ring, depending on which ring(s) are currently placed.
     elif(choice == 2):
-        currentSize = len(ringStack)
+        if len(ringStack) <= 4:
+            colorChoice = input("Input the color you would like to add (No caps)\nValid colors are: Red, Orange, Yellow, Green,\nBlue, Purple, Cyan, White\n")
 
-        if len(ringStack) == 0:
-            ringStack.append(Blue)
-        elif len(ringStack) == 1:
-            ringStack.append(Green)
-        elif len(ringStack) == 2:
-            ringStack.append(Yellow)
-        elif len(ringStack) == 3:
-            ringStack.append(Orange)
-        elif len(ringStack) == 4:
-            ringStack.append(Red)
+
+            if colorChoice == "red":
+                ringStack.append(Red)
+            elif colorChoice == "orange":
+                ringStack.append(Orange)
+            elif colorChoice == "yellow":
+                ringStack.append(Yellow)
+            elif colorChoice == "green":
+                ringStack.append(Green)
+            elif colorChoice == "blue":
+                ringStack.append(Blue)
+            elif colorChoice == "purple":
+                ringStack.append(Purple)
+            elif colorChoice == "cyan":
+                ringStack.append(Cyan)
+            elif colorChoice == "white":
+                ringStack.append(White)
+            else:
+                print("Input not valid\n")
         else:
-            print("No Rings to Place")
+            print("Max rings (5) placed\n")
         printStack(ringStack)
    
 # Exits the program
